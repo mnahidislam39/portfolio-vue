@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { portfolioData } from '../data/portfolioData.js';
+import { featuredProjectsData } from '../data';
 import { Icon } from '@iconify/vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -18,8 +18,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-// portfolioData থেকে সরাসরি ডেটা নেওয়া
-const featured = portfolioData.featuredWork;
+// featuredProjectsData 
+const featured = featuredProjectsData; 
 const modules = [Navigation, Pagination];
 
 // Active Category State
@@ -39,9 +39,9 @@ const filteredProjects = computed(() => {
 
 <template>
    <section id="featuredWork"
-      class="relative px-4 py-24 overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] featured-section sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      class="relative px-4 pb-30  overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] featured-section sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
 
-      <div id="featured-container" class="max-w-[1440px] mx-auto relative z-10 px-4 sm:px-8 lg:px-12">
+      <div id="featured-container" class="max-w-[1440px] mx-auto relative z-10 ">
 
          <!-- Top Header & Category Filter Row -->
          <div id="featured-header" class="flex flex-col justify-between gap-6 mb-16 lg:flex-row lg:items-end">

@@ -1,14 +1,13 @@
 <script setup>
-import { portfolioData } from '../data/portfolioData.js';
-
+import { heroData } from '../data';
 import { Icon } from '@iconify/vue';
 
-const hero = portfolioData.hero;
+const hero = heroData;
 </script>
 
 <template>
   <section id="home"
-    class="hero-section relative  bg-transparent text-slate-900 dark:text-white pt-32 md:pt-40 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden flex flex-col justify-between transition-colors duration-300">
+    class="hero-section relative  bg-transparent text-slate-900 dark:text-white pt-32 md:pt-40 pb-0 md:pb-20  px-4 sm:px-6 lg:px-8 overflow-hidden flex flex-col justify-between transition-colors duration-300">
     <div
       class="hero-bg-pattern absolute inset-0 opacity-[0.03] dark:opacity-[0.07] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] dark:bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
     </div>
@@ -135,12 +134,12 @@ const hero = portfolioData.hero;
 
           <!-- মূল ছবি -->
           <div class="reative w-full max-w-[380px] sm:max-w-[450px] flex justify-center">
-            <img class="absolute bottom-0  md:bottom-[-10%]  hero-main-image w-full max-h-[700px] h-full md:h-full md:bottom-0 object-cover md:object-contain md:transform scale-140 object-top drop-shadow-2xl " :src="hero.image"
+            <img class="absolute bottom-[60px]  md:bottom-[-10%]  hero-main-image w-full max-h-[400px] md:max-h-[500px] h-full md:h-full md:bottom-0 object-cover md:object-contain md:transform scale-[1.5]  md:scale-[1.55]  object-top drop-shadow-2xl " :src="hero.image"
               alt="Nahid">
           </div>
 
           <!-- ফ্লোটিং ব্যাজ ১: Top Left (Shopify Development) -->
-          <div class="absolute left-2 sm:left-6 top-16 sm:top-24 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
+          <div class="absolute left-2 sm:left-6 top-60 md:top-16 sm:top-24 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
             <div class=" w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center animate-pulse">
               <Icon icon="lucide:shopping-bag" class="text-base" />
             </div>
@@ -150,7 +149,7 @@ const hero = portfolioData.hero;
           </div>
 
           <!-- ফ্লোটিং ব্যাজ ২: Top Right (Custom Liquid) -->
-          <div class="absolute right-2 sm:right-6 top-24 sm:top-32 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
+          <div class="absolute right-2 sm:right-6 top-75 md:top-32 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
             <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center animate-pulse">
               <Icon icon="lucide:code" class="text-base" />
             </div>
@@ -160,7 +159,7 @@ const hero = portfolioData.hero;
           </div>
 
           <!-- ফ্লোটিং ব্যাজ ৩: Bottom Left (Performance Focused) -->
-          <div class="absolute left-2 sm:left-4 bottom-20 sm:bottom-28 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20 ">
+          <div class="absolute left-2 sm:left-4 bottom-20 md:bottom-28 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20 ">
             <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center animate-pulse">
               <Icon icon="lucide:zap" class="text-base" />
             </div>
@@ -170,7 +169,7 @@ const hero = portfolioData.hero;
           </div>
 
           <!-- ফ্লোটিং ব্যাজ ৪: Bottom Right (eCommerce Solutions) -->
-          <div class="absolute right-2 sm:right-4 bottom-12 sm:bottom-20 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
+          <div class="absolute right-2 sm:right-4 bottom-5 sm:bottom-20 bg-white dark:bg-[#121a18] border border-slate-200 dark:border-emerald-900/50 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce-slow z-20">
             <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center animate-pulse">
               <Icon icon="lucide:layers" class="text-base" />
             </div>

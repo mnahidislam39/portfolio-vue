@@ -1,168 +1,228 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { singleProjectData } from '../data/singleProjectData.js';
 import { Icon } from '@iconify/vue';
-import { portfolioData } from '../data/portfolioData'; // আপনার ডেটা ফাইল থেকে ডেটা ইম্পোর্ট করা হলো
 
 const route = useRoute();
 const router = useRouter();
+const projectId = route.params.id;
 
-// রাউটার থেকে প্রজেক্টের আইডি (যেমন: /project/kangroute) নেওয়া
-const projectId = computed(() => route.params.id);
+// singleProjectData.js থেকে ডায়নামিকভাবে প্রজেক্ট ডাটা খুঁজে বের করা (Featured বা Projects লিস্ট থেকে)
+const projectData = computed(() => {
+   // ১. প্রথমে ফিচারড প্রজেক্টের সাথে আইডি মিলছে কিনা চেক করা
+   if (
+      singleProjectData.selectedWork?.featuredProject &&
+      (singleProjectData.selectedWork.featuredProject.id === projectId || 
+       singleProjectData.selectedWork.featuredProject.projectId === projectId)
+   ) {
+      return singleProjectData.selectedWork.featuredProject;
+   }
+   
+   // ২. না পেলে সাধারণ প্রজেক্টগুলোর লিস্ট থেকে খোঁজা
+   if (singleProjectData.selectedWork?.projects) {
+      return singleProjectData.selectedWork.projects.find(p => p.id === projectId) || null;
+   }
 
-// portfolioData থেকে আইডি অনুযায়ী নির্দিষ্ট প্রজেক্টের অবজেক্ট খুঁজে বের করা
-const project = computed(() => {
-   return portfolioData[projectId.value] || null;
+   return null;
 });
 
-// হোম পেজে বা আগের পেজে ফিরে যাওয়ার ফাংশন
+// ডায়নামিক ব্যাক বাটন (যে সেকশন থেকে এসেছে সেখানেই ফিরিয়ে নিয়ে যাবে)
 const goBack = () => {
-   router.push('/');
+   router.back();
 };
 </script>
 
 <template>
-   <div class="min-h-screen bg-[#fbf9f4] dark:bg-[#0f0d0b] text-slate-900 dark:text-slate-100 py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-      <div class="max-w-4xl mx-auto" v-if="project">
+   <div class="bg-[#0f0d0b] min-h-screen text-slate-100 py-24 px-4 sm:px-6 lg:px-8 selection:bg-emerald-500 selection:text-white">
+      <div class="max-w-[1440px] mx-auto">
 
-         <!-- ব্যাক বাটন -->
-         <button @click="goBack"
-            class="inline-flex items-center gap-2 px-4 py-2 mb-8 transition-all border rounded-full bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 hover:text-slate-900 dark:hover:text-white group">
-            <Icon icon="lucide:arrow-left" class="transition-transform group-hover:-translate-x-1" />
-            <span>Back to Home</span>
-         </button>
-
-         <!-- প্রজেক্ট হেডার -->
-         <div class="mb-8 space-y-4">
-            <div class="flex items-center gap-3">
-               <span
-                  class="px-3 py-1 text-xs font-medium border rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20">
-                  {{ project.category }}
-               </span>
-               <span class="text-sm text-slate-400 dark:text-slate-500">ID: {{ projectId }}</span>
-            </div>
-            <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl">
-               {{ project.title }}
-            </h1>
-         </div>
-
-         <!-- প্রজেক্ট মেটা ইনফো (Client, Duration ইত্যাদি) -->
-         <div
-            class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-[2rem] bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] shadow-[0_10px_30px_rgba(0,0,0,0.03)] mb-10">
-            <div>
-               <p class="text-xs tracking-wider uppercase text-slate-400 dark:text-slate-500">Client</p>
-               <p class="mt-1 font-bold text-slate-900 dark:text-white">{{ project.client }}</p>
-            </div>
-            <div>
-               <p class="text-xs tracking-wider uppercase text-slate-400 dark:text-slate-500">Duration</p>
-               <p class="mt-1 font-bold text-slate-900 dark:text-white">{{ project.duration }}</p>
-            </div>
-            <div>
-               <p class="text-xs tracking-wider uppercase text-slate-400 dark:text-slate-500">Live Preview</p>
-               <a :href="project.liveUrl" target="_blank"
-                  class="inline-flex items-center gap-1 mt-1 font-bold text-emerald-700 dark:text-emerald-400 hover:underline">
-                  Visit Site
-                  <Icon icon="lucide:external-link" class="text-xs" />
-               </a>
-            </div>
-            <div>
-               <p class="text-xs tracking-wider uppercase text-slate-400 dark:text-slate-500">Source Code</p>
-               <a :href="project.githubUrl" target="_blank"
-                  class="inline-flex items-center gap-1 mt-1 font-bold text-emerald-700 dark:text-emerald-400 hover:underline">
-                  GitHub
-                  <Icon icon="lucide:github" class="text-xs" />
-               </a>
-            </div>
-         </div>
-
-         <!-- ব্যানার ইমেজ -->
-         <div class="mb-12 overflow-hidden border shadow-[0_10px_30px_rgba(0,0,0,0.03)] rounded-[2.5rem] border-slate-200/90 dark:border-[#26201a] bg-white dark:bg-[#16120e]">
-            <img :src="project.bannerImage" :alt="project.title" class="w-full h-[350px] sm:h-[480px] object-cover" />
-         </div>
-
-         <!-- প্রজেক্ট ওভারভিউ -->
-         <div class="space-y-12 text-slate-600 dark:text-slate-300">
-            <section class="space-y-4">
-               <h2 class="flex items-center gap-2 text-2xl font-black text-slate-900 dark:text-white">
-                  <span class="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400"></span> Project Overview
-               </h2>
-               <p class="text-base sm:text-lg leading-relaxed text-slate-500 dark:text-slate-400">
-                  {{ project.overview }}
-               </p>
-            </section>
-
-            <!-- চ্যালেঞ্জ ও সলিউশন -->
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-               <div class="p-6 sm:p-8 space-y-3 border rounded-[2.5rem] bg-white dark:bg-[#16120e] border-slate-200/90 dark:border-[#26201a] shadow-[0_10px_30px_rgba(0,0,0,0.03)]">
-                  <h3 class="flex items-center gap-2 text-xl font-black text-red-600 dark:text-red-400">
-                     <Icon icon="lucide:alert-circle" /> The Challenge
-                  </h3>
-                  <p class="text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                     {{ project.challenge }}
-                  </p>
-               </div>
-               <div class="p-6 sm:p-8 space-y-3 border rounded-[2.5rem] bg-white dark:bg-[#16120e] border-slate-200/90 dark:border-[#26201a] shadow-[0_10px_30px_rgba(0,0,0,0.03)]">
-                  <h3 class="flex items-center gap-2 text-xl font-black text-emerald-600 dark:text-emerald-400">
-                     <Icon icon="lucide:check-circle-2" /> Our Solution
-                  </h3>
-                  <p class="text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                     {{ project.solution }}
-                  </p>
-               </div>
-            </div>
-
-            <!-- মূল ফিচারসমূহ -->
-            <section class="space-y-4" v-if="project.keyFeatures && project.keyFeatures.length > 0">
-               <h2 class="flex items-center gap-2 text-2xl font-black text-slate-900 dark:text-white">
-                  <span class="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400"></span> Key Features
-               </h2>
-               <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <li v-for="(feature, index) in project.keyFeatures" :key="index"
-                     class="flex items-start gap-3 p-5 rounded-[2rem] bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] shadow-[0_5px_20px_rgba(0,0,0,0.02)]">
-                     <Icon icon="lucide:check" class="flex-shrink-0 mt-1 text-emerald-600 dark:text-emerald-400" />
-                     <span class="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200">{{ feature }}</span>
-                  </li>
-               </ul>
-            </section>
-
-            <!-- টেক স্ট্যাক -->
-            <section class="space-y-4" v-if="project.techStack && project.techStack.length > 0">
-               <h2 class="flex items-center gap-2 text-2xl font-black text-slate-900 dark:text-white">
-                  <span class="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400"></span> Technologies Used
-               </h2>
-               <div class="flex flex-wrap gap-3">
-                  <span v-for="(tech, index) in project.techStack" :key="index"
-                     class="px-4 py-2 text-xs font-bold border rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">
-                     {{ tech }}
-                  </span>
-               </div>
-            </section>
-
-         </div>
-
-         <!-- ফুটার কল টু অ্যাকশন -->
-         <div class="flex items-center justify-between pt-8 mt-16 border-t border-slate-200 dark:border-[#26201a]">
-            <button @click="goBack"
-               class="flex items-center justify-center gap-2 px-6 py-4 text-xs font-bold text-white dark:text-slate-950 transition-all shadow-md bg-emerald-950 dark:bg-emerald-500 hover:bg-emerald-900 dark:hover:bg-emerald-400 rounded-xl">
-               <Icon icon="lucide:arrow-left" /> Explore More Projects
+         <!-- Back Button -->
+         <div class="mb-8">
+            <button @click="goBack" class="inline-flex items-center gap-2 text-emerald-400 font-bold text-sm hover:underline cursor-pointer">
+               <span>←</span> <span>Back to Previous Section</span>
             </button>
          </div>
 
-      </div>
+         <div v-if="projectData">
+            
+            <!-- Top Hero Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+               
+               <!-- Left Info -->
+               <div class="lg:col-span-5 flex flex-col justify-between">
+                  <div>
+                     <span class="inline-block px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-900/50 text-emerald-400 text-xs font-extrabold tracking-widest uppercase mb-4">
+                        {{ projectData.badge || projectData.category || 'FEATURED PROJECT' }}
+                     </span>
+                     <h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-4 text-white">
+                        {{ projectData.title }}
+                     </h1>
+                     <p class="text-slate-400 text-base sm:text-lg mb-8 leading-relaxed">
+                        {{ projectData.description }}
+                     </p>
 
-      <!-- যদি ভুল আইডি দিয়ে কেউ প্রবেশ করে -->
-      <div v-else class="max-w-md py-24 mx-auto space-y-6 text-center">
-         <div
-            class="flex items-center justify-center w-20 h-20 mx-auto text-3xl text-red-500 border rounded-full bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20">
-            <Icon icon="lucide:file-question" />
+                     <!-- Meta Details Grid (Dynamic) -->
+                     <div class="grid grid-cols-2 gap-6 py-6 border-t border-b border-[#26201a] mb-8">
+                        <div>
+                           <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Industry</div>
+                           <div class="text-sm font-bold text-slate-200">{{ projectData.industry || 'eCommerce' }}</div>
+                        </div>
+                        <div>
+                           <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Platform</div>
+                           <div class="text-sm font-bold text-slate-200">{{ projectData.platform || 'Shopify' }}</div>
+                        </div>
+                        <div>
+                           <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Duration</div>
+                           <div class="text-sm font-bold text-slate-200">{{ projectData.duration || '3 Weeks' }}</div>
+                        </div>
+                        <div>
+                           <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">My Role</div>
+                           <div class="text-sm font-bold text-slate-200">{{ projectData.myRole || 'Full-Stack Developer' }}</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- CTAs -->
+                  <div class="flex flex-wrap gap-4">
+                     <a :href="projectData.liveUrl || projectData.link || '#'" target="_blank"
+                        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-all shadow-lg shadow-emerald-900/20">
+                        <span>View Live Store</span>
+                        <Icon icon="lucide:external-link" class="w-4 h-4" />
+                     </a>
+                     <a :href="projectData.videoUrl || '#'"
+                        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#26201a] bg-[#16120e] hover:border-emerald-500 text-white font-bold text-sm transition-all">
+                        <Icon icon="lucide:play" class="w-4 h-4 text-emerald-400" />
+                        <span>View Case Study Video</span>
+                     </a>
+                  </div>
+               </div>
+
+               <!-- Right Preview Image/Mockup -->
+               <div class="lg:col-span-7 bg-[#16120e] border border-[#26201a] rounded-[2.5rem] p-4 sm:p-6 shadow-2xl">
+                  <div class="rounded-2xl overflow-hidden border border-[#26201a] bg-[#1c1713] aspect-video flex items-center justify-center">
+                     <div v-html="projectData.imageHtml || projectData.image" class="w-full h-full flex items-center justify-center"></div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Metrics Bar -->
+            <div v-if="projectData.metrics && projectData.metrics.length > 0" class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+               <div v-for="(metric, mIdx) in projectData.metrics" :key="mIdx" class="bg-[#16120e] border border-[#26201a] rounded-3xl p-6 text-center">
+                  <div class="text-3xl sm:text-4xl font-black text-emerald-400 mb-2">{{ metric.value }}</div>
+                  <div class="text-xs font-medium text-slate-400">{{ metric.label }}</div>
+               </div>
+            </div>
+
+            <!-- 4 Column Detailed Breakdown (Challenge, Approach, Solution, Result) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+               
+               <!-- Challenge -->
+               <div class="bg-[#16120e] border border-[#26201a] rounded-3xl p-6">
+                  <h3 class="text-xs font-black tracking-widest text-rose-400 uppercase mb-6 flex items-center gap-2">
+                     <span class="w-2 h-2 rounded-full bg-rose-500"></span> THE CHALLENGE
+                  </h3>
+                  <ul class="space-y-4">
+                     <li v-for="(item, idx) in projectData.challenges" :key="idx" class="flex items-start gap-3 text-sm text-slate-300">
+                        <span class="text-rose-400 font-bold mt-0.5">✕</span>
+                        <span>{{ item }}</span>
+                     </li>
+                  </ul>
+               </div>
+
+               <!-- Approach -->
+               <div class="bg-[#16120e] border border-[#26201a] rounded-3xl p-6">
+                  <h3 class="text-xs font-black tracking-widest text-amber-400 uppercase mb-6 flex items-center gap-2">
+                     <span class="w-2 h-2 rounded-full bg-amber-500"></span> THE APPROACH
+                  </h3>
+                  <ul class="space-y-4">
+                     <li v-for="(item, idx) in projectData.approach" :key="idx" class="flex items-start gap-3 text-sm text-slate-300">
+                        <span class="text-amber-400 font-bold mt-0.5">✓</span>
+                        <span>{{ item }}</span>
+                     </li>
+                  </ul>
+               </div>
+
+               <!-- Solution -->
+               <div class="bg-[#16120e] border border-[#26201a] rounded-3xl p-6">
+                  <h3 class="text-xs font-black tracking-widest text-sky-400 uppercase mb-6 flex items-center gap-2">
+                     <span class="w-2 h-2 rounded-full bg-sky-500"></span> THE SOLUTION
+                  </h3>
+                  <ul class="space-y-4">
+                     <li v-for="(item, idx) in projectData.solutions" :key="idx" class="flex items-start gap-3 text-sm text-slate-300">
+                        <span class="text-sky-400 font-bold mt-0.5">✓</span>
+                        <span>{{ item }}</span>
+                     </li>
+                  </ul>
+               </div>
+
+               <!-- Result -->
+               <div class="bg-[#16120e] border border-[#26201a] rounded-3xl p-6">
+                  <h3 class="text-xs font-black tracking-widest text-emerald-400 uppercase mb-6 flex items-center gap-2">
+                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span> THE RESULT
+                  </h3>
+                  <ul class="space-y-4">
+                     <li v-for="(item, idx) in projectData.results" :key="idx" class="flex items-start gap-3 text-sm text-slate-300">
+                        <span class="text-emerald-400 font-bold mt-0.5">★</span>
+                        <span>{{ item }}</span>
+                     </li>
+                  </ul>
+               </div>
+
+            </div>
+
+            <!-- Project Scope & Technologies Split Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+               
+               <!-- Scope -->
+               <div class="lg:col-span-6 bg-[#16120e] border border-[#26201a] rounded-3xl p-8">
+                  <h3 class="text-xl font-black text-white mb-6">PROJECT SCOPE</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <div v-for="(scope, sIdx) in projectData.scopes" :key="sIdx" class="flex items-center gap-3 text-sm text-slate-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        <span>{{ scope }}</span>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Technologies & Tools -->
+               <div class="lg:col-span-6 bg-[#16120e] border border-[#26201a] rounded-3xl p-8">
+                  <h3 class="text-xl font-black text-white mb-6">TECHNOLOGIES & TOOLS</h3>
+                  <div class="flex flex-wrap gap-4">
+                     <div v-for="(tool, tIdx) in projectData.tools" :key="tIdx" class="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#1c1713] border border-[#2d2620] text-slate-200 text-xs font-bold">
+                        <Icon v-if="tool.icon" :icon="tool.icon" class="w-5 h-5" />
+                        <span>{{ typeof tool === 'string' ? tool : tool.name }}</span>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+            <!-- Testimonial Section -->
+            <div v-if="projectData.testimonial" class="bg-[#16120e] border border-[#26201a] rounded-3xl p-8 sm:p-12 mb-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+               <div class="text-emerald-500 text-6xl font-serif shrink-0">“</div>
+               <div>
+                  <p class="text-lg sm:text-xl italic text-slate-300 mb-6 leading-relaxed">
+                     "{{ projectData.testimonial.quote }}"
+                  </p>
+                  <div>
+                     <div class="font-bold text-white text-base">{{ projectData.testimonial.author }}</div>
+                     <div class="text-xs text-slate-400">{{ projectData.testimonial.title }}</div>
+                  </div>
+               </div>
+            </div>
+
          </div>
-         <h2 class="text-3xl font-black text-slate-900 dark:text-white">Project Not Found</h2>
-         <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">The project you are looking for does not exist or has been removed.</p>
-         <button @click="goBack"
-            class="flex items-center justify-center w-full gap-2 px-6 py-4 text-xs font-bold text-white dark:text-slate-950 transition-all shadow-md bg-emerald-950 dark:bg-emerald-500 hover:bg-emerald-900 dark:hover:bg-emerald-400 rounded-xl">
-            <Icon icon="lucide:arrow-left" /> Back to Home
-         </button>
-      </div>
 
+         <!-- Not Found State -->
+         <div v-else class="text-center py-32">
+            <h2 class="text-3xl font-black mb-4">Project Not Found</h2>
+            <p class="text-slate-400 mb-8">The project you are trying to view does not exist or has been removed.</p>
+            <router-link to="/" class="px-8 py-4 rounded-full bg-emerald-600 text-white font-bold text-sm">
+               Return Home
+            </router-link>
+         </div>
+
+      </div>
    </div>
 </template>

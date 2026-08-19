@@ -1,200 +1,270 @@
 <script setup>
-import { portfolioData } from '../data/portfolioData.js';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { selectedWorkData } from '../data';
 import { Icon } from '@iconify/vue';
-const workData = portfolioData.selectedWork;
+
+const router = useRouter();
+const workData = selectedWorkData;
+
+// বর্তমানে কোন প্রজেক্টটি খোলা আছে তার ইনডেক্স ট্র্যাক করার জন্য
+const activeIndex = ref(null);
+
+const viewProjectDetails = (id) => {
+   if (id) {
+      router.push(`/project/${id}`);
+   }
+};
+
+// ক্লিক করলে শুধু নির্দিষ্ট প্রজেক্ট টগল হবে এবং অন্যগুলো বন্ধ হয়ে যাবে
+const toggleDetails = (index) => {
+   if (activeIndex.value === index) {
+     activeIndex.value = null; // যদি অলরেডি ওপেন থাকে, তবে বন্ধ করে দিবে
+   } else {
+     activeIndex.value = index; // নতুনটিতে ক্লিক করলে সেটি ওপেন হবে এবং বাকিগুলো হাইড হয়ে যাবে
+   }
+};
 </script>
 
 <template>
-   <section :id="workData.id" class="selected-work-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-24 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
+   <section :id="workData.id"
+      class="selected-work-section bg-[#fbf9f4] dark:bg-[#0f0d0b] pb-30  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
 
-      <!-- Max width restricted to 1440px -->
-      <div class="max-w-[1440px] mx-auto relative z-10 px-4 sm:px-8 lg:px-12">
+      <div id="selected-work-max-width-container" class="max-w-[1440px] mx-auto relative z-10">
+         <div id="selected-work-header-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
 
-         <!-- Top Section Header & Featured Grid Row -->
-         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-
-            <!-- Left Side: Title & Main CTA (Span 4) -->
-            <div class="lg:col-span-4 flex flex-col justify-between">
-               <div>
-                  <!-- Header Tag -->
-                  <div class="flex flex-col items-start mb-6">
-                     <span class="text-xs font-bold tracking-[0.2em] text-emerald-600 dark:text-emerald-400 uppercase mb-3">{{
-                        workData.sectionNumber }}</span>
-                     <div class="relative flex items-center justify-start w-36">
-                        <div class="absolute w-full h-[1.5px] bg-gradient-to-r from-emerald-600/40 dark:from-emerald-400/40 to-transparent">
+            <div id="selected-work-left-col" class="lg:col-span-4 flex flex-col justify-center md:justify-between">
+               <div id="selected-work-title-content-wrapper" class="text-center md:text-left">
+                  <div id="selected-work-tag-wrapper"
+                     class="text-center md:text-left flex flex-col items-center md:items-start mb-6">
+                     <span id="selected-work-section-number"
+                        class="text-xs font-bold tracking-[0.2em] text-emerald-600 dark:text-emerald-400 uppercase mb-3">{{
+                           workData.sectionNumber }}</span>
+                     <div id="selected-work-line-indicator"
+                        class="text-center md:text-left relative flex items-center justify-start w-36">
+                        <div id="selected-work-line-gradient"
+                           class="absolute w-full h-[1.5px] bg-gradient-to-r from-emerald-600/40 dark:from-emerald-400/40 to-transparent">
                         </div>
-                        <span class="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 relative z-10"></span>
+                        <span id="selected-work-line-dot"
+                           class="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 relative z-10"></span>
                      </div>
                   </div>
 
-                  <!-- Headline -->
-                  <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
-                     SELECTED <span class="text-emerald-600 dark:text-emerald-400">SHOPIFY</span> WORK
+                  <h2 id="selected-work-headline"
+                     class="text-4xl sm:text-5xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
+                     SELECTED <span id="selected-work-headline-highlight"
+                        class="text-emerald-600 dark:text-emerald-400">SHOPIFY</span> WORK
                   </h2>
 
-                  <!-- Description -->
-                  <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-8 font-normal leading-relaxed">
-                     Real stores. Real problems. Real results. Here are some of the Shopify projects I've built that deliver value and drive growth.
+                  <p id="selected-work-description"
+                     class="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-8 font-normal leading-relaxed">
+                     {{ workData.description }}
                   </p>
                </div>
 
-               <!-- View All Projects Button -->
-               <div>
-                  <a :href="workData.mainButtonLink || '#all-projects'"
+               <div id="selected-work-main-btn-wrapper" class=" text-center md:text-left">
+                  <a :href="workData.mainButtonLink || '#all-projects'" id="selected-work-main-btn"
                      class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-slate-200 dark:border-[#26201a] hover:border-emerald-600 dark:hover:border-emerald-400 text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-400 font-bold text-sm transition-all duration-300 group shadow-sm bg-white dark:bg-[#16120e]">
-                     <span>{{ workData.mainButtonText || 'VIEW ALL PROJECTS' }}</span>
-                     <span class="transition-transform group-hover:translate-x-1">→</span>
+                     <span id="selected-work-main-btn-text">{{ workData.mainButtonText || 'VIEW ALL PROJECTS' }}</span>
+                     <span id="selected-work-main-btn-arrow"
+                        class="transition-transform group-hover:translate-x-1">→</span>
                   </a>
                </div>
             </div>
 
-            <!-- Right Side: Featured Project Card (Span 8) -->
-            <div
-               class="lg:col-span-8 bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] p-6 sm:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row gap-8 items-center">
+            <div id="selected-work-featured-card"
+               class="lg:col-span-8 bg-white dark:bg-[#16120e] overflow-hidden rounded-[2.5rem] flex flex-col lg:flex-row gap-8 items-center flex-col-reverse md:flex-row">
 
-               <!-- Featured Info -->
-               <div class="w-full lg:w-1/2 flex flex-col justify-between">
-                  <div>
-                     <div
+               <div id="selected-work-featured-info-col" class="w-full lg:w-1/2 p-6 flex flex-col justify-between">
+                  <div id="selected-work-featured-inner-wrapper">
+                     <div id="selected-work-featured-badge-wrapper"
                         class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-400 text-[11px] font-extrabold tracking-wider mb-4">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400"></span>
+                        <span id="selected-work-featured-badge-dot"
+                           class="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400"></span>
                         {{ workData.featuredProject.badge || 'FEATURED PROJECT' }}
                      </div>
 
-                     <h3 class="text-3xl font-black text-slate-900 dark:text-white mb-3">{{ workData.featuredProject.title }}</h3>
+                     <h3 id="selected-work-featured-title"
+                        class="text-3xl font-black text-slate-900 dark:text-white mb-3">{{
+                           workData.featuredProject.title }}</h3>
 
-                     <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
+                     <p id="selected-work-featured-desc"
+                        class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
                         {{ workData.featuredProject.description }}
                      </p>
 
-                     <!-- Tags -->
-                     <div class="flex flex-wrap gap-2 mb-6">
+                     <div id="selected-work-featured-tags" class="flex flex-wrap gap-2 mb-6">
                         <span v-for="(tag, tIdx) in workData.featuredProject.tags" :key="tIdx"
+                           id="selected-work-featured-tag-item"
                            class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-[#1c1713] border border-slate-200 dark:border-[#2d2620] text-slate-700 dark:text-slate-300 text-xs font-bold">
                            {{ tag }}
                         </span>
                      </div>
 
-                     <!-- Metrics Row -->
-                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-t border-b border-slate-100 dark:border-[#26201a] mb-6">
-                        <div>
-                           <div class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+62%</div>
-                           <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Conversion Rate</div>
+                     <div id="selected-work-metrics-row"
+                        class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-t border-b border-slate-100 dark:border-[#26201a] mb-6">
+                        <div id="selected-work-metric-1">
+                           <div id="selected-work-metric-1-value"
+                              class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+62%</div>
+                           <div id="selected-work-metric-1-label"
+                              class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Conversion Rate</div>
                         </div>
-                        <div>
-                           <div class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+48%</div>
-                           <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">AOV Increase</div>
+                        <div id="selected-work-metric-2">
+                           <div id="selected-work-metric-2-value"
+                              class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+48%</div>
+                           <div id="selected-work-metric-2-label"
+                              class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">AOV Increase</div>
                         </div>
-                        <div>
-                           <div class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">-35%</div>
-                           <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Load Time</div>
+                        <div id="selected-work-metric-3">
+                           <div id="selected-work-metric-3-value"
+                              class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">-35%</div>
+                           <div id="selected-work-metric-3-label"
+                              class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Load Time</div>
                         </div>
-                        <div>
-                           <div class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+70%</div>
-                           <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Mobile Sales</div>
+                        <div id="selected-work-metric-4">
+                           <div id="selected-work-metric-4-value"
+                              class="text-emerald-700 dark:text-emerald-400 font-black text-base sm:text-lg">+70%</div>
+                           <div id="selected-work-metric-4-label"
+                              class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Mobile Sales</div>
                         </div>
                      </div>
                   </div>
 
-                  <div>
-                     <a :href="workData.featuredProject.caseStudyLink"
-                        class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group">
-                        <span>{{ workData.featuredProject.caseStudyText || 'VIEW CASE STUDY' }}</span>
-                        <span class="transition-transform group-hover:translate-x-1">→</span>
-                     </a>
+                  <div id="selected-work-featured-btn-wrapper">
+                     <button @click="viewProjectDetails(workData.featuredProject.projectId)"
+                        id="selected-work-featured-btn"
+                        class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group cursor-pointer">
+                        <span id="selected-work-featured-btn-text">{{ workData.featuredProject.caseStudyText || 'VIEW CASE STUDY' }}</span>
+                        <span id="selected-work-featured-btn-arrow"
+                           class="transition-transform group-hover:translate-x-1">→</span>
+                     </button>
                   </div>
                </div>
 
-               <!-- Featured Image Preview -->
-               <div class="w-full lg:w-1/2 h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-200 dark:border-[#26201a] bg-slate-100 dark:bg-[#1c1713]">
-                  <div v-html="workData.featuredProject.imageHtml" class="w-full h-full flex items-center justify-center"></div>
-               </div>
-
-            </div>
-
-         </div>
-
-         <!-- 3 Columns Standard Projects Grid -->
-         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-
-            <div v-for="(project, pIdx) in workData.projects" :key="pIdx"
-               class="bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] p-6 sm:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col justify-between transition-all duration-300 hover:border-slate-300 dark:hover:border-[#382f25]">
-
-               <div>
-                  <!-- Project Image Preview -->
-                  <div class="w-full h-52 rounded-2xl overflow-hidden border border-slate-200 dark:border-[#26201a] bg-slate-100 dark:bg-[#1c1713] mb-6">
-                     <div v-html="project.imageHtml" class="w-full h-full flex items-center justify-center"></div>
+               <div id="selected-work-featured-image-col"
+                  class="w-full lg:w-1/2 h-full overflow-hidden bg-slate-100 dark:bg-[#1c1713]">
+                  <div id="selected-work-featured-image-inner"
+                     class="w-full h-full bg-slate-100 flex items-center justify-center overflow-hidden rounded-tr-lg rounded-br-lg">
+                     <img :src="workData.featuredProject.imageUrl" :alt="workData.featuredProject.title"
+                        class="w-full h-full object-cover" />
                   </div>
-
-                  <!-- Title & Sub-category badge -->
-                  <div class="flex items-center justify-between mb-2">
-                     <h3 class="text-2xl font-black text-slate-900 dark:text-white">{{ project.title }}</h3>
-                     <span class="text-[11px] text-slate-600 dark:text-slate-400 font-semibold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-[#1c1713] border border-slate-200 dark:border-[#2d2620]">{{ project.category || 'Store' }}</span>
-                  </div>
-
-                  <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">{{ project.description }}</p>
-
-                  <!-- Challenge / Solution / Result Structured Rows -->
-                  <div class="space-y-3 mb-6 bg-slate-50 dark:bg-[#1c1713]/60 p-4 rounded-2xl border border-slate-200 dark:border-[#2d2620]/60">
-                     <div class="flex items-start gap-2 text-xs">
-                        <span class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">CHALLENGE</span>
-                        <span class="text-slate-700 dark:text-slate-300">{{ project.challenge || 'Low conversion rate and poor product discovery.' }}</span>
-                     </div>
-                     <div class="flex items-start gap-2 text-xs">
-                        <span class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">SOLUTION</span>
-                        <span class="text-slate-700 dark:text-slate-300">{{ project.solution || 'Custom sections, product bundles, and subscription app integration.' }}</span>
-                     </div>
-                     <div class="flex items-start gap-2 text-xs">
-                        <span class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">RESULT</span>
-                        <span class="text-emerald-700 dark:text-emerald-400 font-bold">{{ project.result || '+55% conversion rate and +40% subscription sales.' }}</span>
-                     </div>
-                  </div>
-
-                  <!-- Tags -->
-                  <div class="flex flex-wrap gap-2 mb-8">
-                     <span v-for="(tag, tgIdx) in project.tags" :key="tgIdx"
-                        class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-[#1c1713] border border-slate-200 dark:border-[#2d2620] text-slate-700 dark:text-slate-300 text-xs font-bold">
-                        {{ tag }}
-                     </span>
-                  </div>
-               </div>
-
-               <!-- Case Study Link -->
-               <div class="pt-4 border-t border-slate-100 dark:border-[#26201a]">
-                  <a :href="project.caseStudyLink"
-                     class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group">
-                     <span>{{ project.caseStudyText || 'VIEW CASE STUDY' }}</span>
-                     <span class="transition-transform group-hover:translate-x-1">→</span>
-                  </a>
                </div>
 
             </div>
 
          </div>
 
-         <!-- Bottom CTA Banner Card -->
-         <div
+         <!-- প্রজেক্ট গ্রিড সেকশন -->
+         <div id="selected-work-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 items-start">
+
+            <div v-for="(project, pIdx) in workData.projects" :key="pIdx" id="selected-work-project-card-item"
+               class="bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col justify-between transition-all duration-300 hover:border-slate-300 dark:hover:border-[#382f25]">
+
+               <div id="selected-work-project-top-content">
+                  <div id="selected-work-project-image-wrapper"
+                     class="w-full h-70 rounded-2xl rounded-br-none rounded-bl-none overflow-hidden border-none">
+                     <div id="selected-work-project-image-inner"
+                        class="w-full h-full bg-slate-100 flex items-center justify-center overflow-hidden rounded-2xl rounded-bl-none rounded-br-none border border-slate-200/40 shadow-sm">
+                        <img :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
+                     </div>
+                  </div>
+
+                  <!-- টাইটেল, ডিসক্রিপশন এবং টগল বাটন অংশ -->
+                  <div class="p-6 pb-2">
+                     <div id="selected-work-project-title-row" class="flex items-center justify-between mb-2">
+                        <h3 id="selected-work-project-title" class="text-2xl font-black text-slate-900 dark:text-white">
+                           {{ project.title }}</h3>
+                        <span id="selected-work-project-category"
+                           class="text-[11px] text-slate-600 dark:text-slate-400 font-semibold px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-[#1c1713] border border-slate-200 dark:border-[#2d2620]">{{
+                              project.category || 'Store' }}</span>
+                     </div>
+
+                     <p id="selected-work-project-description"
+                        class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">{{ project.description
+                        }}</p>
+
+                     <!-- সিঙ্গেল অ্যাক্টিভ টগল বাটন -->
+                     <button @click="toggleDetails(pIdx)"
+                        class="flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline focus:outline-none cursor-pointer mb-2">
+                        <span>{{ activeIndex === pIdx ? 'Hide Details' : 'Show Details' }}</span>
+                        <span class="transition-transform duration-300"
+                           :class="{ 'rotate-180': activeIndex === pIdx }">▼</span>
+                     </button>
+                  </div>
+
+                  <!-- শুধুমাত্র ক্লিক করা প্রজেক্টটি শো করবে, বাকি সব হাইড থাকবে -->
+                  <div v-show="activeIndex === pIdx"
+                     class="selected-work-project-info-wrapper px-6 pt-2 pb-6 transition-all duration-300">
+                     <div id="selected-work-project-csr-box" class="space-y-3 mb-6 rounded-2xl">
+                        <div id="selected-work-project-challenge-row" class="flex items-start gap-2 text-xs">
+                           <span id="selected-work-project-challenge-label"
+                              class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">CHALLENGE</span>
+                           <span id="selected-work-project-challenge-text" class="text-slate-700 dark:text-slate-300">{{
+                              project.challenge || 'Low conversion rate and poor product discovery.' }}</span>
+                        </div>
+                        <div id="selected-work-project-solution-row" class="flex items-start gap-2 text-xs">
+                           <span id="selected-work-project-solution-label"
+                              class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">SOLUTION</span>
+                           <span id="selected-work-project-solution-text" class="text-slate-700 dark:text-slate-300">{{
+                              project.solution || 'Custom sections, product bundles, and subscription app integration.'
+                              }}</span>
+                        </div>
+                        <div id="selected-work-project-result-row" class="flex items-start gap-2 text-xs">
+                           <span id="selected-work-project-result-label"
+                              class="font-black text-emerald-700 dark:text-emerald-400 shrink-0 w-20">RESULT</span>
+                           <span id="selected-work-project-result-text"
+                              class="text-emerald-700 dark:text-emerald-400 font-bold">{{ project.result || '+55% conversion rate and +40% subscription sales.' }}</span>
+                        </div>
+                     </div>
+
+                     <div id="selected-work-project-tags-wrapper" class="flex flex-wrap gap-2">
+                        <span v-for="(tag, tgIdx) in project.tags" :key="tgIdx" id="selected-work-project-tag-item"
+                           class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-[#1c1713] border border-slate-200 dark:border-[#2d2620] text-slate-700 dark:text-slate-300 text-xs font-bold">
+                           {{ tag }}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+
+               <div id="selected-work-project-btn-wrapper" class="p-6 border-t border-slate-100 dark:border-[#26201a]">
+                  <button @click="viewProjectDetails(project.id)" id="selected-work-project-btn"
+                     class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group cursor-pointer">
+                     <span id="selected-work-project-btn-text">{{ project.caseStudyText || 'VIEW CASE STUDY' }}</span>
+                     <span id="selected-work-project-btn-arrow"
+                        class="transition-transform group-hover:translate-x-1">→</span>
+                  </button>
+               </div>
+
+            </div>
+
+         </div>
+
+         <div id="selected-work-cta-banner"
             class="bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] p-8 sm:p-12 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row items-center justify-between gap-8">
 
-            <div class="flex items-center gap-6">
-               <div
+            <div id="selected-work-cta-left"
+               class="flex items-center flex-col md:flex-row text-center md:text-left gap-6">
+               <div id="selected-work-cta-icon-wrapper"
                   class="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900/50 flex items-center justify-center shrink-0 text-emerald-700 dark:text-emerald-400">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
+                  <svg id="selected-work-cta-svg" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
                      viewBox="0 0 24 24">
                      <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
                </div>
-               <div>
-                  <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-1">{{ workData.ctaBox?.title || 'HAVE A SIMILAR PROJECT IN MIND?' }}</h3>
-                  <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-medium">{{ workData.ctaBox?.description || 'I help brands build Shopify stores that are fast, scalable and focused on driving real results.' }}</p>
+               <div id="selected-work-cta-text-wrapper">
+                  <h3 id="selected-work-cta-title" class="text-2xl font-black text-slate-900 dark:text-white mb-1">{{
+                     workData.ctaBox?.title }}</h3>
+                  <p id="selected-work-cta-description"
+                     class="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-medium">{{
+                        workData.ctaBox?.description }}</p>
                </div>
             </div>
 
-            <div>
-               <a :href="workData.ctaBox?.buttonLink || '#contact'"
+            <div id="selected-work-cta-right">
+               <a :href="workData.ctaBox?.buttonLink || '#contact'" id="selected-work-cta-button"
                   class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-800 dark:bg-emerald-600 hover:bg-emerald-900 dark:hover:bg-emerald-500 text-white font-bold text-sm transition-all duration-300 shadow-md">
-                  <span>{{ workData.ctaBox?.buttonText || 'START A PROJECT' }}</span>
-                  <span>→</span>
+                  <span id="selected-work-cta-button-text">{{ workData.ctaBox?.buttonText }}</span>
+                  <span id="selected-work-cta-button-arrow">→</span>
                </a>
             </div>
 

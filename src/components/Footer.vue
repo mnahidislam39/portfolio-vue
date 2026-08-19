@@ -1,6 +1,8 @@
 <script setup>
-import { portfolioData } from '../data/portfolioData.js';
+import { footerData } from '../data/';
 import { Icon } from '@iconify/vue';
+
+const footer = footerData;
 </script>
 
 <template>

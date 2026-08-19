@@ -1,8 +1,4 @@
 @import "tailwindcss";
-
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
-
 /* Tailwind v4 Theme Configuration for Fonts */
 @theme {
   --font-sans: 'Inter', sans-serif;
@@ -20,7 +16,7 @@ html {
   50% { transform: translateY(-10px); }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, a, button{
   font-family: var(--font-heading) !important;
   text-transform: uppercase !important;
 }
@@ -28,6 +24,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
   font-family: var(--font-sans);
 }
+
 
 .animate-bounce-slow {
   animation: floatSlow 3s ease-in-out infinite;
