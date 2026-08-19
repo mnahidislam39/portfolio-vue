@@ -7,7 +7,7 @@ export { selectedWorkData } from './selectedWorkData.js';
 export { caseStudyData } from './caseStudyData.js';
 export { clientReviewData } from './clientReviewData.js';
 export { contactData } from './contactData.js';
-export { experienceData } from './experienceData.js';
+export { aboutData } from './aboutData.js';
 export { faqData } from './faqData.js';
 export { footerData } from './footerData.js';
 export { singleProjectData } from './singleProjectData.js';

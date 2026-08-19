@@ -6,12 +6,12 @@ const techData = techStackData;
 
 <template>
    <section :id="techData.id"
-      class="tech-stack-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-24 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300">
+      class="tech-stack-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-20 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300">
 
       <div id="tech-stack-container" class="max-w-[1440px] mx-auto relative z-10 ">
 
          <div id="tech-stack-ambient-pulse"
-            class="absolute left-4 top-10 hidden lg:flex items-center justify-center pointer-events-none">
+            class="absolute md:flex left-4 top-10 hidden lg:flex items-center justify-center pointer-events-none">
             <div id="tech-stack-pulse-wrapper" class="relative w-40 h-40 flex items-center justify-center">
                <div id="tech-stack-pulse-ring-1"
                   class="absolute inset-0 rounded-full border border-emerald-500/10 animate-pulse"></div>
@@ -32,7 +32,7 @@ const techData = techStackData;
          </div>
 
          <div id="tech-stack-dots-grid"
-            class="absolute right-4 top-10 hidden lg:grid grid-cols-5 gap-2.5 opacity-30 pointer-events-none">
+            class="absolute right-4 top-10 hidden md:grid grid-cols-5 gap-2.5 opacity-30 pointer-events-none">
             <div id="tech-stack-dot-item" class="w-1 h-1 rounded-full bg-emerald-700 dark:bg-emerald-500 animate-pulse"
                v-for="i in 25" :key="i"></div>
          </div>

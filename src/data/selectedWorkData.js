@@ -61,6 +61,6 @@ export const selectedWorkData = {
       title: "Have a similar project in mind?",
       description: "I help brands build Shopify stores that are fast, scalable and focused on driving real results.",
       buttonText: "Start a Project",
-      buttonLink: "#"
+      buttonLink: "#contact"
    }
 };

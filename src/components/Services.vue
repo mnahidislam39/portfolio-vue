@@ -8,7 +8,7 @@ const services = centralServicesData;
 
 <template>
    <section :id="services.id"
-      class="services-section bg-[#fbf9f4] dark:bg-[#0f0d0b] pb-30  px-4 md:pt-0 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
+      class="services-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-20  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
 
       <!-- Max width container with custom class -->
       <div id="services-container" class="max-w-[1440px] mx-auto relative z-10 flex flex-col gap-10">

@@ -1,23 +1,19 @@
 <script setup>
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
 import { caseStudyData } from '../data';
 import { Icon } from '@iconify/vue';
 
-const router = useRouter();
 const caseData = caseStudyData;
 
-const viewProjectDetails = (id) => {
-   router.push(`/project/${id}`);
-};
+
 </script>
 
 <template>
-   <section class="case-study-section bg-[#fbf9f4] dark:bg-[#0f0d0b] pb-30  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300" :id="caseData.id">
+   <section class="case-study-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-20  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300" :id="caseData.id">
       <div class="case-study-container max-w-[1440px] mx-auto relative z-10 ">
          <div class="case-study-grid-main grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-12">
-            <div class="case-study-content-left lg:col-span-5 flex flex-col">
-               <div class="case-study-header-wrap flex flex-col items-start mb-6">
+            <div class="case-study-content-left  text-center md:text-left justify-center md:justify-start lg:col-span-5 flex flex-col">
+               <div class="case-study-header-wrap flex flex-col items-center  md:items-start mb-6">
                   <span class="text-xs font-bold tracking-[0.2em] text-emerald-600 dark:text-emerald-400 uppercase mb-3">{{ caseData.sectionNumber }}</span>
                   <div class="case-study-line-wrap relative flex items-center justify-start w-36">
                      <div class="case-study-line absolute w-full h-[1.5px] bg-gradient-to-r from-emerald-600/40 to-transparent"></div>
@@ -37,7 +33,7 @@ const viewProjectDetails = (id) => {
                   </div>
                </div>
                <div class="case-study-steps-list space-y-8 mb-10">
-                  <div class="case-study-step-item flex items-start gap-4" v-for="(step, sIdx) in caseData.sections" :key="sIdx">
+                  <div class="case-study-step-item flex text-left items-start gap-4" v-for="(step, sIdx) in caseData.sections" :key="sIdx">
                      <div class="case-study-step-icon-wrap w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-900/50 flex items-center justify-center shrink-0 text-emerald-600 dark:text-emerald-400">
                         <div class="case-study-step-icon w-full h-full flex items-center justify-center" v-html="step.icon"></div>
                      </div>
@@ -47,11 +43,11 @@ const viewProjectDetails = (id) => {
                      </div>
                   </div>
                </div>
-               <div class="case-study-button-wrap flex items-center">
-                  <button class="case-study-btn inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 font-bold text-sm transition-all duration-300 shadow-md group cursor-pointer" @click="viewProjectDetails(caseData.projectId)">
-                     <span class="inline-block">{{ caseData.mainButtonText }}</span>
+               <div class="case-study-button-wrap flex justify-center md:justify-left items-center">
+                 <a :href="caseData.mainButtonLink" class="case-study-btn inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 font-bold text-sm transition-all duration-300 shadow-md group cursor-pointer">
+                    {{ caseData.mainButtonText }}
                      <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
-                  </button>
+                 </a>
                </div>
             </div>
             <div class="case-study-content-right lg:col-span-7 flex flex-col gap-8 h-full">

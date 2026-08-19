@@ -19,6 +19,7 @@ html {
 h1, h2, h3, h4, h5, h6, a, button{
   font-family: var(--font-heading) !important;
   text-transform: uppercase !important;
+  letter-spacing: 0.05em ;
 }
 
 body {

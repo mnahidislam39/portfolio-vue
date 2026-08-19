@@ -7,7 +7,6 @@ import { Icon } from '@iconify/vue';
 const router = useRouter();
 const workData = selectedWorkData;
 
-// বর্তমানে কোন প্রজেক্টটি খোলা আছে তার ইনডেক্স ট্র্যাক করার জন্য
 const activeIndex = ref(null);
 
 const viewProjectDetails = (id) => {
@@ -16,19 +15,18 @@ const viewProjectDetails = (id) => {
    }
 };
 
-// ক্লিক করলে শুধু নির্দিষ্ট প্রজেক্ট টগল হবে এবং অন্যগুলো বন্ধ হয়ে যাবে
 const toggleDetails = (index) => {
    if (activeIndex.value === index) {
-     activeIndex.value = null; // যদি অলরেডি ওপেন থাকে, তবে বন্ধ করে দিবে
+     activeIndex.value = null; 
    } else {
-     activeIndex.value = index; // নতুনটিতে ক্লিক করলে সেটি ওপেন হবে এবং বাকিগুলো হাইড হয়ে যাবে
+     activeIndex.value = index; 
    }
 };
 </script>
 
 <template>
    <section :id="workData.id"
-      class="selected-work-section bg-[#fbf9f4] dark:bg-[#0f0d0b] pb-30  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
+      class="selected-work-section bg-[#fbf9f4] dark:bg-[#0f0d0b] py-20  px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 relative transition-colors duration-300">
 
       <div id="selected-work-max-width-container" class="max-w-[1440px] mx-auto relative z-10">
          <div id="selected-work-header-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
@@ -261,7 +259,7 @@ const toggleDetails = (index) => {
             </div>
 
             <div id="selected-work-cta-right">
-               <a :href="workData.ctaBox?.buttonLink || '#contact'" id="selected-work-cta-button"
+               <a :href="workData.ctaBox?.buttonLink" id="selected-work-cta-button"
                   class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-800 dark:bg-emerald-600 hover:bg-emerald-900 dark:hover:bg-emerald-500 text-white font-bold text-sm transition-all duration-300 shadow-md">
                   <span id="selected-work-cta-button-text">{{ workData.ctaBox?.buttonText }}</span>
                   <span id="selected-work-cta-button-arrow">→</span>

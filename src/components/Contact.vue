@@ -5,7 +5,6 @@ import { Icon } from '@iconify/vue';
 
 const contact = contactData; 
 
-// ফর্মের ডেটা হোল্ড করার জন্য reactive state
 const form = ref({
    name: '',
    email: '',
@@ -18,7 +17,6 @@ const form = ref({
    details: ''
 });
 
-// সিলেক্ট করা প্রজেক্ট অনুযায়ী data.js থেকে বাজেট ফিল্টার করার জন্য computed property
 const availableBudgets = computed(() => {
    const mapping = contact.form.budgetMapping || {};
    return mapping[form.value.projectType] || contact.form.budgetRanges;
@@ -27,12 +25,12 @@ const availableBudgets = computed(() => {
 
 <template>
    <section id="contact"
-      class="contact-section relative px-4 pb-30 overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      class="contact-section relative px-4 py-20 overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
 
       <div id="contact-container" class="contact-container max-w-[1440px] mx-auto relative z-10">
 
          <!-- Main Grid Layout (Left Info & Right Form) -->
-         <div id="contact-grid-layout" class="contact-grid-layout grid items-start grid-cols-1 gap-12 mb-16 lg:grid-cols-12">
+         <div id="contact-grid-layout" class="contact-grid-layout grid items-start grid-cols-1 gap-12 lg:grid-cols-12">
 
             <!-- Left Column: Heading & Contact Info (5 Cols) -->
             <div id="contact-left-col" class="contact-left-column lg:col-span-5 lg:sticky lg:top-24 flex flex-col gap-8">
@@ -236,46 +234,6 @@ const availableBudgets = computed(() => {
 
                </div>
 
-            </div>
-
-         </div>
-
-         <!-- Bottom Footer Info (Process & Commitment) -->
-         <div id="contact-bottom-grid"
-            class="contact-bottom-grid grid items-center grid-cols-1 gap-8 pt-12 border-t lg:grid-cols-12 border-slate-100 dark:border-[#26201a]">
-
-            <!-- Process (7 Cols) -->
-            <div id="contact-process-box"
-               class="contact-process-container lg:col-span-7 bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)]">
-               <h4 class="contact-process-heading text-xs font-bold tracking-[0.2em] text-emerald-600 dark:text-emerald-400 uppercase mb-6">{{ contact.processHeading }}</h4>
-               <div class="contact-process-steps-grid grid grid-cols-2 gap-4 text-center sm:grid-cols-5">
-                  <div v-for="(proc, index) in contact.processSteps" :key="index" class="contact-process-step-item flex flex-col items-center">
-                     <span
-                        class="contact-process-step-icon flex items-center justify-center w-10 h-10 mb-2 text-lg rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400">
-                        <Icon :icon="proc.icon" />
-                     </span>
-                     <p class="contact-process-step-text text-xs font-bold text-slate-800 dark:text-slate-200">{{ proc.step }}. {{ proc.title }}</p>
-                  </div>
-               </div>
-            </div>
-
-            <!-- Commitment (5 Cols) -->
-            <div id="contact-commitment-box"
-               class="contact-commitment-container lg:col-span-5 bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row items-center justify-between gap-6">
-               <div class="contact-commitment-content">
-                  <h4 class="contact-commitment-heading text-xs font-bold tracking-[0.2em] text-emerald-600 dark:text-emerald-400 uppercase mb-4">{{ contact.commitmentHeading }}
-                  </h4>
-                  <ul class="contact-commitment-list space-y-2 text-xs font-bold text-slate-700 dark:text-slate-300">
-                     <li v-for="(commit, index) in contact.commitments" :key="index" class="contact-commitment-item flex items-center gap-2">
-                        <Icon icon="lucide:check-circle-2" class="text-base text-emerald-600 dark:text-emerald-400" /> {{ commit }}
-                     </li>
-                  </ul>
-               </div>
-               <div class="contact-author-box text-center sm:text-right shrink-0">
-                  <h3 class="contact-author-name mb-1 text-2xl italic font-bold font-script text-emerald-700 dark:text-emerald-400">{{ contact.author.name }}</h3>
-                  <p class="contact-author-title text-[10px] font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">{{ contact.author.title }}
-                  </p>
-               </div>
             </div>
 
          </div>

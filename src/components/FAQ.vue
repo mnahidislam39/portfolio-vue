@@ -12,7 +12,7 @@ const toggleAccordion = (index) => {
 </script>
 
 <template>
-   <section id="faq-section" class="relative px-4 pb-30 overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+   <section id="faq" class="relative px-4 py-20 overflow-hidden bg-[#fbf9f4] dark:bg-[#0f0d0b] sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <div id="faq-main-container" class="faq-container max-w-[1440px] mx-auto relative z-10">
 
          <!-- Top Grid: Left Column & Right Accordion -->

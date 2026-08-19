@@ -4,10 +4,11 @@ export const headerData = {
   navLinks: [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
-    { name: "Projects", href: "#featuredwork" },
+    { name: "Projects", href: "#featuredWork" },
+    { name: "faq", href: "#faq" },
+    { name: "Testimonials", href: "#testimonials" },
     { name: "About Me", href: "#about" },
     { name: "Contact", href: "#contact" },
-    { name: "Testimonials", href: "#testimonials" }
   ],
   ctaText: "Let's Talk",
   ctaLink: "#contact"

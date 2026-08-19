@@ -1,58 +1,48 @@
 export const footerData = {
-  personal: {
-    firstName: "Nahid",
-    lastName: "Islam",
-    title: "Shopify Expert & Full-Stack Developer",
-    bio: "I help businesses build high-converting Shopify stores, stunning websites, and custom web solutions that drive results and growth.",
-    email: "hello@nahidislam.dev",
-    phone: "+880 1712 345 678",
-    location: "Ishwardi, Pabna Bangladesh",
-    responseTime: "Within 24 Hours",
-    copyrightYear: "2026",
-    tagline: "Building Digital Experiences That Drive Results.",
-  },
-
-  socialLinks: [
-    { name: "LinkedIn", icon: "lucide:linkedin", url: "https://linkedin.com" },
-    { name: "GitHub", icon: "lucide:github", url: "https://github.com" },
-    { name: "Twitter", icon: "lucide:twitter", url: "https://twitter.com" },
-    { name: "Website", icon: "lucide:globe", url: "https://nahidislam.dev" },
-    { name: "Dribbble", icon: "lucide:dribbble", url: "https://dribbble.com" },
-  ],
-
-  quickLinks: [
-    { name: "Home", href: "#home" },
-    { name: "About Me", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "My Process", href: "#process" },
-    { name: "Client Feedback", href: "#feedback" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
-  ],
-
-  servicesList: [
-    { name: "Shopify Store Development", icon: "lucide:shopping-bag", href: "#services" },
-    { name: "Shopify Theme Customization", icon: "lucide:palette", href: "#services" },
-    { name: "Shopify App Integration", icon: "lucide:puzzle", href: "#services" },
-    { name: "WordPress Development", icon: "lucide:globe", href: "#services" },
-    { name: "Webflow Development", icon: "lucide:layout", href: "#services" },
-    { name: "Custom Web Development", icon: "lucide:code", href: "#services" },
-    { name: "Speed Optimization", icon: "lucide:zap", href: "#services" },
-    { name: "Maintenance & Support", icon: "lucide:headphones", href: "#services" },
-  ],
-
-  resourcesList: [
-    { name: "Blog", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Shopify Tips", href: "#" },
-    { name: "Free Resources", href: "#" },
-    { name: "Tools I Use", href: "#" },
-  ],
-
-  legalLinks: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Refund Policy", href: "#" },
-  ]
+   personal: {
+      firstName: "Nahid",
+      lastName: "Islam",
+      title: "Shopify Expert & Full-Stack Developer",
+      bio: "I help businesses build high-converting Shopify stores, stunning websites, and custom web solutions that drive results and growth.",
+      email: "devnahidislam4@gmail.com",
+      phone: "+8801761005639",
+      location: "Pabna, Rajshahi, Bangladesh",
+      responseTime: "Within 24 Hours",
+      copyrightYear: 2026,
+      tagline: "Building Digital Experiences That Drive Results.",
+      logoUrl: "/nahid-logo.png"
+   },
+   quickLinks: [
+      { name: "Home", href: "#home" },
+      { name: "Services", href: "#services" },
+      { name: "Projects", href: "#featuredWork" },
+      { name: "FAQ", href: "#faq" },
+      { name: "Testimonials", href: "#testimonials" },
+      { name: "About Me", href: "#about" },
+      { name: "Contact", href: "#contact" }
+   ],
+   servicesList: [
+      { name: "Shopify Development", href: "#services", icon: "lucide:shopping-bag" },
+      { name: "Custom Web Apps", href: "#services", icon: "lucide:code" },
+      { name: "API Integration", href: "#services", icon: "lucide:database" },
+      { name: "Store Optimization", href: "#services", icon: "lucide:zap" }
+   ],
+   featuresList: [
+      { text: "Quality Focused" },
+      { text: "On-Time Delivery" },
+      { text: "Clear Communication" },
+      { text: "100% Client Satisfaction" }
+   ],
+   socialLinks: [
+      { name: "LinkedIn", url: "https://linkedin.com/in/mnahidislam39", icon: "lucide:linkedin" },
+      { name: "GitHub", url: "https://github.com/mnahidislam39", icon: "lucide:github" },
+      { name: "Twitter", url: "https://twitter.com", icon: "lucide:twitter" },
+      { name: "Website", url: "#", icon: "lucide:globe" },
+      { name: "Dribbble", url: "#", icon: "lucide:dribbble" }
+   ],
+   legalLinks: [
+      { name: "Privacy Policy", href: "#" },
+      { name: "Terms of Service", href: "#" },
+      { name: "Refund Policy", href: "#" }
+   ]
 };

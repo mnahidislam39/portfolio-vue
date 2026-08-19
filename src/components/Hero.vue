@@ -47,7 +47,7 @@ const hero = heroData;
 
          
           <!-- অ্যাকশন বাটন গ্রুপ -->
-          <div class="hero-cta-group flex flex-wrap items-center gap-4 relative z-30">
+          <div class="hero-cta-group flex justify-center md:justify-start flex-wrap items-center gap-4 relative z-30">
             <a class="hero-primary-btn flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-all shadow-lg shadow-emerald-600/25 cursor-pointer"
               :href="hero.primaryCta.link">
               <span>{{ hero.primaryCta.text }}</span>

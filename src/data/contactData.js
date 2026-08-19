@@ -18,7 +18,7 @@ export const contactData = {
       {
          icon: "lucide:map-pin",
          label: "Location",
-         value: "Rajshahi, Bangladesh",
+         value: "Pabna, Rajshahi, Bangladesh",
          href: null
       }
    ],
@@ -258,22 +258,5 @@ budgetMapping: {
       uploadSubtext: "Max file size: 10MB",
       submitButtonText: "Submit Inquiry"
    },
-   processHeading: "Our Simple Process",
-   processSteps: [
-      { step: "01", title: "Discovery", icon: "lucide:search" },
-      { step: "02", title: "Strategy", icon: "lucide:lightbulb" },
-      { step: "03", title: "Development", icon: "lucide:code" },
-      { step: "04", title: "Testing", icon: "lucide:check-circle" },
-      { step: "05", title: "Launch", icon: "lucide:rocket" }
-   ],
-   commitmentHeading: "My Commitment to You",
-   commitments: [
-      "Clear & transparent communication",
-      "On-time delivery guaranteed",
-      "High-quality clean code standards"
-   ],
-   author: {
-      name: "Nahid",
-      title: "Lead Developer"
-   }
+
 };
