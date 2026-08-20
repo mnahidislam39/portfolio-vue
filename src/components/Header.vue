@@ -78,7 +78,7 @@ onUnmounted(() => {
          <a
             class="flex items-center gap-3 cursor-pointer group"
             id="site-logo-link"
-            href="/"
+            href="https://mnahidislam39.github.io/portfolio-vue"
             @click="handleNavClick('#home')"
          >
             <img

@@ -1,6 +1,6 @@
 export const headerData = {
   logoText: "Nahid Islam",
-  logoImg: "/nahid-logo.png",
+  logoImg: "nahid-logo.png",
   navLinks: [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
