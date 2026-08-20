@@ -31,5 +31,5 @@ export const heroData = {
     text: "Start a Project", 
     link: "#contact" 
   },
-   'na.png'
+   image: 'na.png'
 };
