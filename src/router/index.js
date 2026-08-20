@@ -16,7 +16,8 @@ const routes = [
 ];
 
 const router = createRouter({
-   history: createWebHistory(),
+   // এখানে import.meta.env.BASE_URL যোগ করতে হবে
+   history: createWebHistory(import.meta.env.BASE_URL),
    routes,
    scrollBehavior() {
       return { top: 0 }; 
