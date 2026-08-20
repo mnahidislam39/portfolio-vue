@@ -13,7 +13,7 @@ export const selectedWorkData = {
       tags: ["Shopify", "Liquid", "Custom Theme", "eCommerce"],
       caseStudyText: "View Case Study",
       caseStudyLink: "#",
-      imageUrl:  import.meta.env.BASE_URL + 'jewlleryS.png'    
+      imageUrl:  'jewlleryS.png'    
    },
 
    projects: [
@@ -28,7 +28,7 @@ export const selectedWorkData = {
          tags: ["Shopify", "Liquid", "Subscription", "Responsive"],
          caseStudyText: "View Case Study",
          caseStudyLink: "#",
-         imageUrl:  import.meta.env.BASE_URL + 'bag.png'  
+         imageUrl:  'bag.png'  
       },
       {
          id: "aurora-eyewear",
@@ -41,7 +41,7 @@ export const selectedWorkData = {
          tags: ["Shopify", "Liquid", "Filtering", "Quick View"],
          caseStudyText: "View Case Study",
          caseStudyLink: "#",
-         imageUrl:  import.meta.env.BASE_URL + 'resstenonline.png'  
+         imageUrl:  'resstenonline.png'  
       },
       {
          id: "nutrify",
@@ -54,7 +54,7 @@ export const selectedWorkData = {
          tags: ["Shopify", "Custom Theme", "Upsell", "Performance"],
          caseStudyText: "View Case Study",
          caseStudyLink: "#",
-         imageUrl:  import.meta.env.BASE_URL + 'FunnyBunny1.jpg'  
+         imageUrl:  'FunnyBunny1.jpg'  
       }
    ],
    ctaBox: {

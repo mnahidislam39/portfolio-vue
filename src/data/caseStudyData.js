@@ -40,7 +40,7 @@ export const caseStudyData = {
    ],
    mainButtonText: "Project in mind?",
    mainButtonLink: "#contact",
-   mockupImageUrl: "import.meta.env.BASE_URL + dawn.png",
+   mockupImageUrl: "dawn.png'",
    testimonial: {
       quote: "Communication was clear and reliable. feedback was implemented well. and the agreed scope was delivered professionally. The store was set up responsively and important Shopify elements such as markets, shipping structure and the general store setup were prepared as discussed.",
       author: "cptlglo's",

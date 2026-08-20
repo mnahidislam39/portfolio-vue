@@ -11,7 +11,7 @@ export const featuredProjectsData = {
          techBadge: "Shopify Development",
          badgeIcon: "lucide:shopping-bag",
          description: "An advanced e-commerce store built for motorcycle gear enthusiasts with automated inventory sync.",
-         image: import.meta.env.BASE_URL + 's.png',
+          's.png',
          features: [
             { label: "Custom Liquid" },
             { label: "Fast Checkout" }
@@ -24,7 +24,7 @@ export const featuredProjectsData = {
          techBadge: "Shopify Customization",
          badgeIcon: "lucide:code",
          description: "High-performance storefront featuring custom product filtering and responsive design.",
-         image: import.meta.env.BASE_URL + 's.png',
+          's.png',
          features: [
             { label: "Optimized Speed" },
             { label: "Advanced Filter" }
@@ -37,7 +37,7 @@ export const featuredProjectsData = {
          techBadge: "Vue.js & Tailwind",
          badgeIcon: "lucide:layout",
          description: "Tailor-made e-commerce platform crafted with modern dark UI aesthetics and smooth transitions.",
-         image: import.meta.env.BASE_URL + 's.png',
+          's.png',
          features: [
             { label: "Dark UI Design" },
             { label: "API Integrated" }
@@ -50,7 +50,7 @@ export const featuredProjectsData = {
          techBadge: "Vue.js & Tailwind",
          badgeIcon: "lucide:layout",
          description: "Tailor-made e-commerce platform crafted with modern dark UI aesthetics and smooth transitions.",
-         image: import.meta.env.BASE_URL + 's.png',
+          's.png',
          features: [
             { label: "Dark UI Design" },
             { label: "API Integrated" }

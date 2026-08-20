@@ -5,7 +5,7 @@ export const aboutData = {
    subHeadline: "ME",
    authorName: "Nahid Islam",
    description: "I'm a Shopify-focused Full-Stack Web Developer based in Ishwardi, Pabna, Rajshahi, Bangladesh. My primary expertise lies in Shopify store development, customization, and performance optimization, helping businesses build scalable and conversion-focused online stores. Alongside Shopify, I have strong expertise in HTML, CSS, Bootstrap, Tailwind CSS, SASS, JavaScript, jQuery, Vue.js, PHP, and Laravel, allowing me to handle both front-end and back-end development efficiently.",
-   profileImage: import.meta.env.BASE_URL + 'nahid.png',
+   profileImage: 'nahid.png',
    stats: [
       { label: "YEARS EXPERIENCE", value: "3+", icon: "briefcase" },
       { label: "PROJECTS COMPLETED", value: "100+", icon: "projects" },
