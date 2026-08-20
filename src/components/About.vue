@@ -56,7 +56,7 @@ const about = centralAboutData;
                   <div v-if="about.profileImage" class="profile-image-wrapper sm:col-span-5">
                      <div
                         class="image-frame relative rounded-2xl overflow-hidden border-2 border-emerald-500/40 shadow-[0_10px_30px_rgba(16,185,129,0.15)] bg-[#16120e] aspect-[3/4]">
-                        <img :src="import.meta.env.BASE_URL +about.profileImage" :alt="about.authorName"
+                        <img :src="about.profileImage" :alt="about.authorName"
                            class="frame-img w-full h-full object-cover object-center" />
                      </div>
                   </div>

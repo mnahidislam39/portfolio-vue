@@ -52,7 +52,7 @@ export const singleProjectData = {
 
       primaryCta: { text: "View Shopify Work", link: "#selected-work" },
       secondaryCta: { text: "Start a Project", link: "#contact" },
-      image: "/na.png"
+      image: import.meta.env.BASE_URL +na.png"
    },
 
    techStack: {
