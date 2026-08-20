@@ -54,7 +54,7 @@ const caseData = caseStudyData;
                <div class="case-study-mockup-card max-h-[700px] bg-white dark:bg-[#16120e] border border-slate-200/90 dark:border-[#26201a] rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.04)]">
                   <div class="case-study-mockup-inner h-full  w-full flex items-center justify-center">
                      <div class="case-study-mockup-html w-full h-full flex items-center justify-center">
-                        <img :src="import.meta.env.BASE_URL +caseData.mockupImageUrl" alt="Vevano Preview" class="w-full h-full object-cover object-top"/>
+                        <img :src="caseData.mockupImageUrl" alt="Vevano Preview" class="w-full h-full object-cover object-top"/>
                      </div>
                   </div>
                </div>
