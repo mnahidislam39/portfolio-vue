@@ -43,7 +43,7 @@ const caseData = caseStudyData;
                      </div>
                   </div>
                </div>
-               <div class="case-study-button-wrap flex justify-center md:justify-left items-center">
+               <div class="case-study-button-wrap flex justify-center md:justify-start items-center ">
                  <a :href="caseData.mainButtonLink" class="case-study-btn inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 font-bold text-sm transition-all duration-300 shadow-md group cursor-pointer">
                     {{ caseData.mainButtonText }}
                      <span class="inline-block transition-transform group-hover:translate-x-1">→</span>

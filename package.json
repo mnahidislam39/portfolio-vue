@@ -1,12 +1,14 @@
 {
   "name": "my-portfolio",
-  "private": true,
+  "private": "true",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.1",
@@ -20,6 +22,7 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@vitejs/plugin-vue": "^6.0.8",
     "autoprefixer": "^10.5.4",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
     "vite": "^8.2.0"
