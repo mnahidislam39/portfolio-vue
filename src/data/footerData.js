@@ -10,7 +10,7 @@ export const footerData = {
       responseTime: "Within 24 Hours",
       copyrightYear: 2026,
       tagline: "Building Digital Experiences That Drive Results.",
-      logoUrl: "/nahid-logo.png"
+      logoUrl: import.meta.env.BASE_URL + 'nahid-logo.png'
    },
    quickLinks: [
       { name: "Home", href: "#home" },
