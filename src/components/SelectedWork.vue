@@ -143,7 +143,7 @@ const toggleDetails = (index) => {
                   class="w-full lg:w-1/2 h-full overflow-hidden bg-slate-100 dark:bg-[#1c1713]">
                   <div id="selected-work-featured-image-inner"
                      class="w-full h-full bg-slate-100 flex items-center justify-center overflow-hidden rounded-tr-lg rounded-br-lg">
-                     <img :src="workData.featuredProject.imageUrl" :alt="workData.featuredProject.title"
+                     <img :src="import.meta.env.BASE_URL +workData.featuredProject.imageUrl" :alt="workData.featuredProject.title"
                         class="w-full h-full object-cover" />
                   </div>
                </div>
@@ -163,7 +163,7 @@ const toggleDetails = (index) => {
                      class="w-full h-70 rounded-2xl rounded-br-none rounded-bl-none overflow-hidden border-none">
                      <div id="selected-work-project-image-inner"
                         class="w-full h-full bg-slate-100 flex items-center justify-center overflow-hidden rounded-2xl rounded-bl-none rounded-br-none border border-slate-200/40 shadow-sm">
-                        <img :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
+                        <img :src="import.meta.env.BASE_URL +project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
                      </div>
                   </div>
 
